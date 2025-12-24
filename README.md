@@ -1,5 +1,5 @@
 # APC_base-Process-Injection-Tool
-This tool is a Process Injection Tool ( 32-bit ) using the APC technique where instead of creating new Threads  ( which are more likely to be flagged by EDR and AVs ) , it Hijacks existing thread and Inject the code in its queue..... It is not applicable for 64-bit architectured windows as Irvine32 Library is used in it as it is for 32-bit architecture and if I want to make it 64 bit than Irvine64 will be used and whole code has to be changed as 64-bit architecture has registers RAX,RBX,RCX etc. unlike 32-bit architectured windows that has EAX,EAB,ECX etc. registers 
+This tool is a Process Injection Tool ( 32-bit ) using the APC technique where instead of creating new Threads  ( which are more likely to be flagged by EDR and AVs ) , it Hijacks existing thread and Inject the code in its queue..... It is not applicable for 64-bit architectured windows as Irvine32 Library is used in it as it is for 32-bit architecture and if I want to make it 64-bit than Irvine64 will be used and whole code has to be changed as 64-bit architecture has registers RAX,RBX,RCX etc. unlike 32-bit architectured windows that has EAX,EAB,ECX etc. registers 
 
 This project was made just for educational purpose to demonstrate working of APC ( Asynchronous Procedure Call ) attack as it is stealthier than simple Process inejction ... In my project , to evade signature obfuscation , i have implemented XOR encryption with the malware file so that its signature gets changes and it become able to bypass static analysis of AntiViruses and EDRs . My tool uses 2 modes (simple malware injection , encrypted malware injection ) . 
 
@@ -15,3 +15,7 @@ STEPS TO USE IT :
 
 NOTE : This is online compatible to 32-bit windows . If you tried to inject code to 64-bit windows via this tool , it will likely crash your Program in which you have injected.
 
+To make your project work successfully , some points you have to keep in mind :
+1) Every time you reboot your system , its APIs memory addresses changes so if you reboot your system and tried to inject previous code , your code may not work properly or it probably crashes the program.....
+2) This project fetches the process running in background at that specific time , If you started injection and opened the target application after , then  injection may not work because it haven't captured the process in which you are trying to inject....
+3) If you tried to inject the malware in 64-bit architectured program , it may crash the program as it is not structured to work with 64-bit windows .......
